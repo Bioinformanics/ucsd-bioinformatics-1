@@ -164,7 +164,6 @@ def get_neighbours(pattern, d):
     _find_all_neighbours(pattern, '', d, neighbours)
     return neighbours
 
-
 def _find_all_neighbours(pattern, prefix, d, neighbours):
     if not pattern: return
     sub_pattern = pattern[1:]
@@ -176,7 +175,7 @@ def _find_all_neighbours(pattern, prefix, d, neighbours):
         new_prefix = prefix + base
         neighbours.add(new_prefix + sub_pattern)
         if sub_pattern:
-            _find_all_neighbours(sub_pattern, new_prefix, d-delta_d, neighbours)
+            _find_all_neighbours(sub_pattern, new_prefix, d - delta_d, neighbours)
 
 
 def frequent_words_with_mismatches_and_reverse_complements(dna, k, d):

@@ -91,18 +91,22 @@ def q5():
 
 
 def quiz2_1():
-    print 'Q2: %d' % get_hamming_distance('TGACCCGTTATGCTCGAGTTCGGTCAGAGCGTCATTGCGAGTAGTCGTTTGCTTTCTCAAACTCC',
-                                          'GAGCGATTAAGCGTGACAGCCCCAGGGAACCCACAAAACGTGATCGCAGTCCATCCGATCATACA')
+    print 'Q2: %d' % get_hamming_distance('CAGAAAGGAAGGTCCCCATACACCGACGCACCAGTTTA',
+                                          'CACGCCGTATGCATAAACGAGCCGCACGAACCAGAGAG')
 
 def quiz2_2():
-    print 'Q3: %s' % ToSingleLineOfString(get_maximum_skews('GCATACACTTCCCAGTAGGTACTG'))
+    print 'Q3: %s' % ToSingleLineOfString(get_minimum_skews('CATTCCAGTACTTCGATGATGGCGTGAAGA'))
 
 def quiz2_3():
-    print 'Q4: %s' % str(approximate_pattern_count('AA', 'TACGCATTACAAAGCACA', 1))
+    print 'Q4: %s' % str(approximate_pattern_count('CCC', 'CATGCCATTCGCATTGTCCCAGTGA', 2))
+
+def quiz2_4():
+    print 'Q5: %s' % len(get_neighbours('CCAGTCAATG', 1))
 
 def quiz2():
     quiz2_1()
     quiz2_2()
     quiz2_3()
+    quiz2_4()
 
 quiz2()
