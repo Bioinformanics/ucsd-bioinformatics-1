@@ -140,3 +140,7 @@ def increase_count(dict, pattern):
         dict[pattern] += 1
     else:
         dict[pattern] = 1
+
+
+def find_clump_efficient(dna, k, t, L):
+    pass
