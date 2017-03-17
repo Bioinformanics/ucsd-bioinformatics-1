@@ -10,8 +10,6 @@ from collections import OrderedDict
                 count ← count + 1
         return count
 """
-
-
 def count_pattern(dna, pattern):
     dna = dna.upper()
     pattern = pattern.upper()
@@ -37,8 +35,6 @@ def count_pattern(dna, pattern):
                 add Text(i, k) to FrequentPatterns
         return FrequentPatterns
 """
-
-
 def get_most_freq_n_mer(dna, n):
     dna = str.upper(dna)
     length = str.__len__(dna)
@@ -88,8 +84,6 @@ CODE CHALLENGE: Solve the Pattern Matching Problem.
      Output: A collection of space-separated integers specifying all starting positions where Pattern appears
      as a substring of Genome.
 '''
-
-
 def match_pattern(dna, pattern, match_rc=False):
     dna = dna.upper()
     pattern = pattern.upper()
@@ -105,11 +99,13 @@ def match_pattern(dna, pattern, match_rc=False):
 
 '''
 Clump Finding Problem: Find patterns forming clumps in a string.
-     Input: A string Genome, and integers k, L, and t.
-     Output: All distinct k-mers forming (L, t)-clumps in Genome.
+    Input: A string Genome, and integers k, L, and t.
+    Output: All distinct k-mers forming (L, t)-clumps in Genome.
+Definition of Clump:
+    Given integers L and t, a k-mer Pattern forms an (L, t)-clump inside a (longer) string Genome
+    if there is an interval of Genome of length L in which this k-mer appears at least t times.
+    (This definition assumes that the k-mer completely fits within the interval.)
 '''
-
-
 def find_clump(dna, k, t, L):
     s = dna[0: L]
     counts = _count_frequencies(s, k)
