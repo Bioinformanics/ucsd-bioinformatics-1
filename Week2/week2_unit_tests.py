@@ -1,15 +1,15 @@
 import unittest
-from week2_utility import *
+from Week2.week2_utility import *
 from utilities import ToSingleLineOfString
 
 def ResultEqual(expected, actual_list):
     expected_set = set(expected.split(' ')) if expected else set()
     if len(expected_set) != len(actual_list):
-        print 'Length not equal (expected: %d, actual: %d)' % (len(expected_set), len(actual_list))
+        print('Length not equal (expected: %d, actual: %d)' % (len(expected_set), len(actual_list)))
         return False
     for actual in actual_list:
         if not expected_set.__contains__(actual):
-            print 'Expected element: %s' % actual
+            print('Expected element: %s' % actual)
             return False
     return True
 

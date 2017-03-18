@@ -144,7 +144,7 @@ def _number_to_pattern(number, size):
     reverse_array = []
     for i in range(size):
         residue = number % 4
-        number /= 4
+        number //= 4
         reverse_array.append(_bases[residue])
     return ''.join(reverse_array[::-1])
 
