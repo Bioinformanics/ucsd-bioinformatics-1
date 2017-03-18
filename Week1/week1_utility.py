@@ -89,7 +89,7 @@ def match_pattern(dna, pattern, match_rc=False):
     pattern = pattern.upper()
     pattern_rc = get_reverse_complement(pattern)
     locations = []
-    for index in range(len(dna) - len(pattern)):
+    for index in range(len(dna) - len(pattern) + 1):
         s = dna[index:index + len(pattern)]
         if s == pattern or (match_rc and s == pattern_rc):
             locations.append(str(index))

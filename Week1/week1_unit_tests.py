@@ -1,6 +1,5 @@
 import unittest
-from week1_utility import *
-
+from Week1.week1_utility import *
 
 class TestUtilityCount(unittest.TestCase):
     def test_count_1(self):
@@ -136,7 +135,28 @@ class TestUtilityMatchPattern(unittest.TestCase):
         expected = '19 24 38 49 56 80 128 164 186 225 230 239 387 403 413 419 426 471 482 508 520 604 613 618 623 646 651 679 684 691 713 727 747 770 777 784 801 829 836 841 897 947 986 991 1011 1036 1075 1148 1153 1158 1173 1186 1194 1199 1220 1232 1262 1267 1303 1329 1369 1386 1395 1407 1444 1467 1472 1477 1516 1521 1530 1555 1560 1599 1604 1625 1640 1648 1653 1666 1680 1698 1728 1733 1745 1770 1800 1805 1812 1817 1822 1856 1872 1877 1889 1933 1942 1947 1952 1972 1983 2004 2016 2021 2032 2041 2046 2073 2131 2153 2172 2218 2223 2229 2234 2272 2290 2312 2430 2440 2460 2465 2486 2497 2547 2560 2595 2645 2678 2716 2721 2745 2751 2772 2788 2793 2831 2849 2854 2860 2865 2900 2905 2911 2916 2941 2947 2960 2975 2980 2991 2996 3001 3040 3063 3081 3102 3107 3112 3124 3129 3142 3152 3157 3188 3193 3216 3224 3279 3284 3305 3310 3315 3320 3345 3357 3362 3385 3397 3402 3418 3431 3445 3517 3526 3537 3580 3585 3643 3675 3694 3712 3728 3739 3753 3772 3777 3792 3797 3824 3835 3847 3852 3857 3862 3877 3882 3888 3893 3900 3919 3930 3935 3950 4032 4053 4088'
         locations = match_pattern(dna, pattern)
         self.assertEqual(' '.join(locations), expected)
-    
+
+    def test_match_pattern_4(self):
+        dna = 'TTTTACACTTTTTTGTGTAAAAA'
+        pattern = 'ACAC'
+        expected = '4'
+        locations = match_pattern(dna, pattern)
+        self.assertEqual(' '.join(locations), expected)
+
+    def test_match_pattern_5(self):
+        dna = 'AGCGTGCCGAAATATGCCGCCAGACCTGCTGCGGTGGCCTCGCCGACTTCACGGATGCCAAGTGCATAGAGGAAGCGAGCAAAGGTGGTTTCTTTCGCTTTATCCAGCGCGTTAACCACGTTCTGTGCCGACTTT'
+        pattern = 'TTT'
+        expected = '88 92 98 132'
+        locations = match_pattern(dna, pattern)
+        self.assertEqual(' '.join(locations), expected)
+
+    def test_match_pattern_6(self):
+        dna = 'ATATATA'
+        pattern = 'ATA'
+        expected = '0 2 4'
+        locations = match_pattern(dna, pattern)
+        self.assertEqual(' '.join(locations), expected)
+
 class TestUtilityFindClump(unittest.TestCase):
     def test_find_clump_1(self):
         dna = 'AAAACGTCGAAAAA'
