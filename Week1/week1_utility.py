@@ -39,7 +39,7 @@ def get_most_freq_n_mer(dna, n):
     dna = str.upper(dna)
     length = str.__len__(dna)
     dict = {}
-    for index in range(0, length - n):
+    for index in range(0, length - n + 1):
         n_mer = dna[index: index + n]
         if dict.__contains__(n_mer):
             dict[n_mer] += 1
@@ -48,16 +48,16 @@ def get_most_freq_n_mer(dna, n):
 
     max_count = 0
     most_freq_n_mers = []
-    for n_mer, count in dict.iteritems():
+    for n_mer, count in iter(dict.items()):
         if count > max_count:
             most_freq_n_mers = [n_mer]
             max_count = count
         elif count == max_count:
             most_freq_n_mers.append(n_mer)
 
-    print 'Most Frequent n-mer Count: %d' % max_count
+    print('Most Frequent n-mer Count: %d' % max_count)
     for n_mer in most_freq_n_mers:
-        print n_mer
+        print(n_mer)
     return most_freq_n_mers, max_count
 
 
@@ -93,7 +93,7 @@ def match_pattern(dna, pattern, match_rc=False):
         s = dna[index:index + len(pattern)]
         if s == pattern or (match_rc and s == pattern_rc):
             locations.append(str(index))
-    print ", ".join(locations)
+    print(", ".join(locations))
     return locations
 
 
@@ -110,7 +110,7 @@ def find_clump(dna, k, t, L):
     s = dna[0: L]
     counts = _count_frequencies(s, k)
     frequent_set = set()
-    for pattern, count in counts.iteritems():
+    for pattern, count in iter(counts.items()):
         if count >= t:
             frequent_set.add(pattern)
 
@@ -119,7 +119,7 @@ def find_clump(dna, k, t, L):
         counts[begin] -= 1
         end = dna[index + L - k: index + L]
         increase_count(counts, end)
-        for pattern, count in counts.iteritems():
+        for pattern, count in iter(counts.items()):
             if count >= t:
                 frequent_set.add(pattern)
 
