@@ -29,6 +29,22 @@ def get_minimum_skews(dna):
         elif value == min_value:
             min_value_indices.append(index)
     return min_value_indices
+    """
+    skew = 0
+    min_skew = 10
+    min_skew_indices = []
+    for index in range(len(dna)):
+        nucleotide = dna[index]
+        if nucleotide == 'C':
+            skew -= 1
+            if skew < min_skew:
+                min_skew = skew
+                min_skew_indices = [index+1]
+            elif skew == min_skew:
+                min_skew_indices.append(index+1)
+        elif nucleotide == 'G':
+            skew += 1
+    return min_skew_indices"""
 
 
 def get_maximum_skews(dna):
