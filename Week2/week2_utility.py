@@ -1,4 +1,5 @@
 from Week1.week1_utility import get_reverse_complement
+import itertools
 
 def skew(dna):
     values = [0]
@@ -207,28 +208,22 @@ def frequent_words_with_mismatches_and_reverse_complements(dna, k, d):
     array_size = 4 ** k
     dna_length = len(dna)
     close = [0] * array_size
-    frequency_array = [0] * array_size
-
-    for i in range(dna_length - k + 1):
-        neighbourhood = get_neighbours(dna[i:i + k], d)
-        for pattern in neighbourhood:
-            index = _pattern_to_number(pattern)
-            close[index] = 1
-
     max_count = 0
-    for i in range(array_size):
-        if close[i] == 1:
-            pattern = _number_to_pattern(i, k)
-            count = approximate_pattern_count(pattern, dna, d) + \
-                    approximate_pattern_count(get_reverse_complement(pattern), dna, d)
-            frequency_array[i] = count
+    max_indices = []
+    for i in range(dna_length - k + 1):
+        pattern = dna[i:i + k]
+        neighbors = get_neighbours(pattern, d)
+        rc = get_reverse_complement(pattern)
+        rc_neighbours = get_neighbours(rc, d)
+        for p in itertools.chain(neighbors, rc_neighbours):
+            index = _pattern_to_number(p)
+            close[index] += 1
+            count = close[index]
             if count > max_count:
                 max_count = count
-
-    max_indices = []
-    for i in range(array_size):
-        if frequency_array[i] == max_count:
-            max_indices.append(i)
+                max_indices = [index]
+            elif count == max_count:
+                max_indices.append(index)
 
     return [_number_to_pattern(index, k) for index in max_indices]
 
