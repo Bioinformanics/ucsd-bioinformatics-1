@@ -123,8 +123,8 @@ def find_clump(dna, k, t, L):
             if count >= t:
                 frequent_set.add(pattern)
 
-    frequency_array = sorted(list(frequent_set))
-    return frequency_array
+    clumps = sorted(list(frequent_set))
+    return clumps
 
 
 def _count_frequencies(dna, k):
