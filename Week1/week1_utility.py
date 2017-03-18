@@ -140,3 +140,52 @@ def increase_count(dict, pattern):
         dict[pattern] += 1
     else:
         dict[pattern] = 1
+
+_base_to_number_dict = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
+_number_to_base_table = ['A', 'C', 'G', 'T']
+
+def pattern_to_number(pattern):
+    number = 0
+    for base in pattern:
+        number = number * 4 + _base_to_number_dict[base]
+    return number
+
+def number_to_pattern(number, k):
+    pattern = []
+    while k>0:
+        remainder = number % 4
+        number /= 4
+        pattern.insert(0, _number_to_base_table[remainder])
+        k -= 1
+    return ''.join(pattern)
+
+def compute_frequencies(text, k):
+    frequency_array = [0] * 4**k
+    for index in range(0, len(text) - k + 1):
+        pattern = text[index:index+k]
+        array_index = pattern_to_number(pattern)
+        frequency_array[array_index] += 1
+    return frequency_array
+
+def find_clump_efficient(dna, k, t, L):
+    s = dna[0: L]
+    frequency_array = [0] * 4**k
+    frequent_set = set()
+    for index in range(0, len(s) - k + 1):
+        pattern = s[index:index+k]
+        array_index = pattern_to_number(pattern)
+        frequency_array[array_index] += 1
+        if frequency_array[array_index] >= t:
+            frequent_set.add(pattern)
+
+    for index in range(1, len(dna)-L+1):
+        begin = dna[index - 1: index - 1 + k]
+        frequency_array[pattern_to_number(begin)] -=1
+        end = dna[index + L - k: index + L]
+        end_index = pattern_to_number(end)
+        frequency_array[end_index] += 1
+        if frequency_array[end_index] >= t:
+            frequent_set.add(end)
+
+    clumps = sorted(list(frequent_set))
+    return clumps
