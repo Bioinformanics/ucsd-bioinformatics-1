@@ -1,7 +1,7 @@
 import unittest
 
 from utilities import ConvertTextToMatrix
-from week3_utility import *
+from Week3.week3_utility import *
 from Week2.week2_unit_tests import ResultEqual
 
 class TestMotifEnumeration(unittest.TestCase):

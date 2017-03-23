@@ -1,4 +1,4 @@
-from week3_utility import *
+from Week3.week3_utility import *
 from utilities import ToSingleLineOfString, ConvertTextToMatrix
 
 
@@ -13,7 +13,7 @@ def motif_enumeration_problem():
             "CGCAATGGTGTTCATAAGCGCTTTT"]
     motifs = motif_enumeration(dnas, k, d)
 
-    print ToSingleLineOfString(motifs)
+    print(ToSingleLineOfString(motifs))
 
 
 def calculate_motif_entropy_scores():
@@ -28,7 +28,7 @@ def calculate_motif_entropy_scores():
                 "T   a   G   G   G   G   A   a   c   T   a   C",
                 "T   C   G   G   G   t   A   T   a   a   C   C"]
     motifs = map(lambda s: s.upper(), map(lambda s: s.replace(' ', ''), original))
-    print str(sum(score(motifs)))
+    print(str(sum(score(motifs))))
 
 
 def medium_string_problem():
@@ -44,7 +44,7 @@ def medium_string_problem():
             "AGCAGTGGCTCACCAGCAAGTAGCTCTGGCGTACCTCGTAAG"]
     k = 6
     ms = find_median_string(dnas, k)
-    print ms
+    print(ms)
 
 
 def profile_most_Probable_k_mer_problem():
@@ -56,7 +56,7 @@ def profile_most_Probable_k_mer_problem():
             matrix_text += datafile.readline().strip()
             matrix_text += ' '
     matrix = ConvertTextToMatrix(matrix_text.strip(), k)
-    print get_profile_most_probable_k_mer(dna, matrix)
+    print(get_profile_most_probable_k_mer(dna, matrix))
 
 
 profile_most_Probable_k_mer_problem()

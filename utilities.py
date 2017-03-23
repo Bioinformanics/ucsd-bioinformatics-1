@@ -28,3 +28,13 @@ def ConvertTextToMatrix(text, num_columns):
     text_array = text.split(" ")
     float_array = map(lambda t: float(t), text_array)
     return [float_array[i:i+num_columns] for i in range(0, len(float_array), num_columns)]
+
+def reduce(function, iterable, initializer=None):
+    it = iter(iterable)
+    if initializer is None:
+        value = next(it)
+    else:
+        value = initializer
+    for element in it:
+        value = function(value, element)
+    return value

@@ -3,6 +3,7 @@ import itertools
 
 from Week2.week2_utility import get_neighbours, get_hamming_distance
 from math import log
+from utilities import reduce
 
 from utilities import ConvertBaseToIndex, ConvertIndexToBase
 
