@@ -18,6 +18,7 @@ def _find_motifs(dna, k, d):
     for index in range(len(dna) - k + 1):
         motif = dna[index: index + k]
         neighbours = get_neighbours(motif, d)
+        motifs.add(motif)
         for neighbour in neighbours:
             motifs.add(neighbour)
     return motifs
@@ -25,13 +26,12 @@ def _find_motifs(dna, k, d):
 
 def motif_enumeration(dnas, k, d):
     """
-    Find all (k, d)-motifs in a list of dna strings
+    Find all (k, d)-motifs in a list of dna strings. This is a brute force algorithm to find motifs.
     :param dnas: a list of DNA strings
     :param k: k-mer
     :param d: the maximally allowed distance for a match
     :return: All (k, d)-motifs in Dna
     """
-
     motifs = []
     for dna in dnas:
         motifs.append(_find_motifs(dna, k, d))

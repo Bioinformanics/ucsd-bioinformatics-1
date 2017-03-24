@@ -1,7 +1,6 @@
 from Week3.week3_utility import *
 from utilities import ToSingleLineOfString, ConvertTextToMatrix
 
-
 def motif_enumeration_problem():
     k = 5
     d = 1
@@ -59,4 +58,4 @@ def profile_most_Probable_k_mer_problem():
     print(get_profile_most_probable_k_mer(dna, matrix))
 
 
-profile_most_Probable_k_mer_problem()
+#profile_most_Probable_k_mer_problem()
