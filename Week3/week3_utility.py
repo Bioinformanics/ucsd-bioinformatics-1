@@ -1,10 +1,8 @@
 # coding=utf-8
 import itertools
-
 from Week2.week2_utility import get_neighbours, get_hamming_distance
 from math import log
 from utilities import reduce
-
 from utilities import ConvertBaseToIndex, ConvertIndexToBase
 
 
@@ -17,8 +15,8 @@ def _find_motifs(dna, k, d):
     :return: All (k, d)-motifs in Dna
     """
     motifs = set()
-    for index in range(len(dna)-k+1):
-        motif = dna[index: index+k]
+    for index in range(len(dna) - k + 1):
+        motif = dna[index: index + k]
         neighbours = get_neighbours(motif, d)
         for neighbour in neighbours:
             motifs.add(neighbour)
@@ -53,7 +51,7 @@ class Profile:
         self._counts[index] += 1
 
     def calculate_entropy(self):
-        total = reduce(lambda a, b: a+b, self._counts)
+        total = reduce(lambda a, b: a + b, self._counts)
         max_val = -1
         max_index = -1
         for index in range(4):
@@ -95,7 +93,7 @@ def get_minimum_hamming_distance(pattern, dna):
     k = len(pattern)
     min_distance = k
     for index in range(len(dna) - k + 1):
-        sub_dna = dna[index:index+k]
+        sub_dna = dna[index:index + k]
         distance = get_hamming_distance(pattern, sub_dna)
         if distance < min_distance:
             min_distance = distance
@@ -133,7 +131,7 @@ def get_profile_most_probable_k_mer(dna, profile_matrix):
     max_probability = 0
     max_k_mer = None
     for index in range(len(dna) - k + 1):
-        k_mer = dna[index: index+k]
+        k_mer = dna[index: index + k]
         probability = 1
         for pos, base in enumerate(k_mer):
             probability *= profile_matrix[ConvertBaseToIndex(base)][pos]
