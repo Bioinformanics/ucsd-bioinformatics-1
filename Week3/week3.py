@@ -47,15 +47,14 @@ def medium_string_problem():
 
 
 def profile_most_Probable_k_mer_problem():
-    with open('Datasets/ProfileMostProbableKMerProblem_data01.txt', 'r') as datafile:
+    with open('Datasets/ProfileMostProbableKMer/quiz.txt', 'r') as datafile:
         dna = datafile.readline().strip()
         k = int(datafile.readline().strip())
-        matrix_text = ''
-        for loop in range(5):
-            matrix_text += datafile.readline().strip()
-            matrix_text += ' '
-    matrix = ConvertTextToMatrix(matrix_text.strip(), k)
+        matrix_text = []
+        for loop in range(4):
+            matrix_text.append(datafile.readline().strip())
+    matrix = ConvertTextToMatrix(matrix_text, float)
     print(get_profile_most_probable_k_mer(dna, matrix))
 
 
-#profile_most_Probable_k_mer_problem()
+profile_most_Probable_k_mer_problem()

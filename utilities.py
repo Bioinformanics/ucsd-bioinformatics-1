@@ -24,10 +24,19 @@ def ConvertIndexToBase(index):
     return bases[index]
 
 
-def ConvertTextToMatrix(text, num_columns):
-    text_array = text.split(" ")
-    float_array = map(lambda t: float(t), text_array)
-    return [float_array[i:i+num_columns] for i in range(0, len(float_array), num_columns)]
+def ConvertTextToMatrix(rows, converter = None):
+    """
+    :param rows: list or matrix rows
+    :return: a matrix parsed from text (i.e. a 2D array)
+    """
+    matrix = []
+    for row in rows:
+        row_with_text_values = row.strip().split(" ")
+        if converter:
+            matrix.append([converter(str) for str in row_with_text_values])
+        else:
+            matrix.append(row_with_text_values)
+    return matrix
 
 def reduce(function, iterable, initializer=None):
     it = iter(iterable)

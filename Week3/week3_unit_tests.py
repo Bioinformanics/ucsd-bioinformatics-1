@@ -134,46 +134,51 @@ class TestFindMediumString(unittest.TestCase):
 
 class TestGetProfileMostProbableKmer(unittest.TestCase):
     def test_sample(self):
-        dna = "ACCTGTTTATTGCCTAAGTTCCGAACAAACCCAATATAGCCCGAGGGCCT"
-        k = 5
-        matrix = ConvertTextToMatrix("0.2 0.2 0.3 0.2 0.3 " +
-                                     "0.4 0.3 0.1 0.5 0.1 " +
-                                     "0.3 0.3 0.5 0.2 0.4 " +
-                                     "0.1 0.2 0.1 0.1 0.2", k)
+        with open('Datasets/ProfileMostProbableKMer/sample.txt', 'r') as datafile:
+            dna = datafile.readline().strip()
+            k = int(datafile.readline().strip())
+            matrix_text = []
+            for loop in range(4):
+                matrix_text.append(datafile.readline().strip())
+        matrix = ConvertTextToMatrix(matrix_text, float)
         k_mer = get_profile_most_probable_k_mer(dna, matrix)
         expected = "CCGAG"
         self.assertEqual(expected, k_mer)
 
     def test_dataset_1(self):
-        dna = "AGCAGCTTTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATCTGAACTGGTTACCTGCCGTGAGTAAAT"
-        k = 8
-        matrix = ConvertTextToMatrix("0.7 0.2 0.1 0.5 0.4 0.3 0.2 0.1 " +
-                                     "0.2 0.2 0.5 0.4 0.2 0.3 0.1 0.6 " +
-                                     "0.1 0.3 0.2 0.1 0.2 0.1 0.4 0.2 " +
-                                     "0.0 0.3 0.2 0.0 0.2 0.3 0.3 0.1", k)
+        with open('Datasets/ProfileMostProbableKMer/data01.txt', 'r') as datafile:
+            dna = datafile.readline().strip()
+            k = int(datafile.readline().strip())
+            matrix_text = []
+            for loop in range(4):
+                matrix_text.append(datafile.readline().strip())
+        matrix = ConvertTextToMatrix(matrix_text, float)
         k_mer = get_profile_most_probable_k_mer(dna, matrix)
         expected = "AGCAGCTT"
         self.assertEqual(expected, k_mer)
 
     def test_dataset_2(self):
-        dna = "TTACCATGGGACCGCTGACTGATTTCTGGCGTCAGCGTGATGCTGGTGTGGATGACATTCCGGTGCGCTTTGTAAGCAGAGTTTA"
-        k = 12
-        matrix = ConvertTextToMatrix("0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.1 0.2 0.3 0.4 0.5 " +
-                                     "0.3 0.2 0.1 0.1 0.2 0.1 0.1 0.4 0.3 0.2 0.2 0.1 " +
-                                     "0.2 0.1 0.4 0.3 0.1 0.1 0.1 0.3 0.1 0.1 0.2 0.1 " +
-                                     "0.3 0.4 0.1 0.1 0.1 0.1 0.0 0.2 0.4 0.4 0.2 0.3", k)
+        with open('Datasets/ProfileMostProbableKMer/data02.txt', 'r') as datafile:
+            dna = datafile.readline().strip()
+            k = int(datafile.readline().strip())
+            matrix_text = []
+            for loop in range(4):
+                matrix_text.append(datafile.readline().strip())
+        matrix = ConvertTextToMatrix(matrix_text, float)
         k_mer = get_profile_most_probable_k_mer(dna, matrix)
         expected = "AAGCAGAGTTTA"
         self.assertEqual(expected, k_mer)
 
-    def test_extra_dataset(self):
-        dna = "TGCCCGAGCTATCTTATGCGCATCGCATGCGGACCCTTCCCTAGGCTTGTCGCAAGCCATTATCCTGGGCGCTAGTTGCGCGAGTATTGTCAGACCTGATGACGCTGTAAGCTAGCGTGTTCAGCGGCGCGCAATGAGCGGTTTAGATCACAGAATCCTTTGGCGTATTCCTATCCGTTACATCACCTTCCTCACCCCTA"
-        k = 6
-        matrix = ConvertTextToMatrix("0.364 0.333 0.303 0.212 0.121 0.242 " +
-                                     "0.182 0.182 0.212 0.303 0.182 0.303 " +
-                                     "0.121 0.303 0.182 0.273 0.333 0.303 " +
-                                     "0.333 0.182 0.303 0.212 0.364 0.152", k)
+    def test_debug_dataset(self):
+        with open('Datasets/ProfileMostProbableKMer/debug.txt', 'r') as datafile:
+            dna = datafile.readline().strip()
+            k = int(datafile.readline().strip())
+            matrix_text = []
+            for loop in range(4):
+                matrix_text.append(datafile.readline().strip())
+        matrix = ConvertTextToMatrix(matrix_text, float)
         k_mer = get_profile_most_probable_k_mer(dna, matrix)
+
         expected = "TGTCGC"
         self.assertEqual(expected, k_mer)
 

@@ -39,7 +39,30 @@ def motif_enumeration(dnas, k, d):
     return reduce(and_, motifs)
 
 
+def find_median_string(dnas, k):
+    """
+    Median String Problem: Find a median string.
+    :param dnas: A collection of strings Dna
+    :param k: length of k-mer
+    :return: All k-mer Patterns that minimizes d(Pattern, Dna).
+    """
+    ms = []
+    min_d = len(dnas) * k
+    for l in itertools.product('ACGT', repeat=k):
+        k_mer = ''.join(l)
+        d = reduce(lambda a, b: a + b, map(lambda dna: get_minimum_hamming_distance(k_mer, dna), dnas))
+        if d < min_d:
+            min_d = d
+            ms = [k_mer]
+        elif d == min_d:
+            ms.append(k_mer)
+    return ms
+
+
 class Profile:
+    """
+    Example: https://stepik.org/lesson/Greedy-Motif-Search-159/step/2?course=Stepic-Interactive-Text-for-Week-3&unit=8217
+    """
     def __init__(self):
         self._counts = [0] * 4
         self._probabilities = [0] * 4
@@ -100,29 +123,10 @@ def get_minimum_hamming_distance(pattern, dna):
     return min_distance
 
 
-def find_median_string(dnas, k):
-    """
-    Median String Problem: Find a median string.
-    :param dnas: A collection of strings Dna
-    :param k: length of k-mer
-    :return: All k-mer Patterns that minimizes d(Pattern, Dna).
-    """
-    ms = []
-    min_d = len(dnas) * k
-    for l in itertools.product('ACGT', repeat=k):
-        k_mer = ''.join(l)
-        d = reduce(lambda a, b: a + b, map(lambda dna: get_minimum_hamming_distance(k_mer, dna), dnas))
-        if d < min_d:
-            min_d = d
-            ms = [k_mer]
-        elif d == min_d:
-            ms.append(k_mer)
-    return ms
-
-
 def get_profile_most_probable_k_mer(dna, profile_matrix):
     """
     Profile-most Probable k-mer Problem: Find a Profile-most probable k-mer in a string.
+    (https://stepik.org/lesson/Greedy-Motif-Search-159/step/3?course=Stepic-Interactive-Text-for-Week-3&unit=8217)
     :param dna: a DNA string
     :param profile_matrix: a 4 × k matrix Profile
     :return: A Profile-most probable k-mer in Text.
