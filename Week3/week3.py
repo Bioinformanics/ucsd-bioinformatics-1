@@ -57,4 +57,15 @@ def profile_most_Probable_k_mer_problem():
     print(get_profile_most_probable_k_mer(dna, matrix))
 
 
-profile_most_Probable_k_mer_problem()
+def greedy_motif_search_problem():
+    with open('Datasets/GreedyMotifSearch/quiz.txt', 'r') as datafile:
+        args = datafile.readline().strip().split(" ")
+        k = int(args[0])
+        t = int(args[1])
+        dnas = []
+        for i in range(t):
+            dnas.append(datafile.readline().strip())
+
+    print(str('\n'.join(greedy_motif_search(dnas, k))))
+
+greedy_motif_search_problem()
