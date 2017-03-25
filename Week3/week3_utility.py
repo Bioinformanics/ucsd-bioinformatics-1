@@ -136,11 +136,11 @@ def profile(motifs):
 
 
 def greedy_motif_search(dna_list, k):
-    '''Runs the Greedy Motif Search algorithm and retuns the best motif.'''
+    '''Runs the Greedy Motif Search algorithm and returns the best motif.'''
     # Initialize the best score as a score higher than the highest possible score.
     t = len(dna_list)
     best_score = t*k
-    best_motifs = []
+    best_motifs = None
 
     # Run the greedy motif search.
     for i in range(len(dna_list[0])-k+1):
@@ -151,6 +151,42 @@ def greedy_motif_search(dna_list, k):
         for j in range(1, t):
             current_profile = profile(motifs)
             motifs.append(profile_most_probable_kmer(dna_list[j], k, current_profile))
+
+        # Check to see if we have a new best scoring list of motifs.
+        current_score = score(motifs)
+        if current_score < best_score:
+            best_score = current_score
+            best_motifs = motifs
+
+    return best_motifs
+
+
+def profile_laplace(motifs):
+    '''Returns the profile of the dna list motifs.'''
+    columns = [''.join(seq) for seq in zip(*motifs)]
+    return [[float(col.count(nuc) + 1) / float(len(col) + 4) for nuc in 'ACGT'] for col in columns]
+
+
+def greedy_motif_search_laplace(dna_list, k):
+    """
+    Runs the Greedy Motif Search algorithm and returns the best motif,
+    with applications of Laplace's Rule of Succession
+    """
+    # Initialize the best score as a score higher than the highest possible score.
+    t = len(dna_list)
+    best_score = t*k
+    best_motifs = None
+
+    # Run the greedy motif search.
+    for i in range(len(dna_list[0])-k+1):
+        # Initialize the motifs as each k-mer from the first dna sequence.
+        motifs = [dna_list[0][i:i+k]]
+        current_profile = profile_laplace(motifs)
+
+        # Find the most probable k-mer in the next string.
+        for j in range(1, t):
+            motifs.append(profile_most_probable_kmer(dna_list[j], k, current_profile))
+            current_profile = profile_laplace(motifs)
 
         # Check to see if we have a new best scoring list of motifs.
         current_score = score(motifs)

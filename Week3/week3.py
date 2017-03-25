@@ -68,4 +68,17 @@ def greedy_motif_search_problem():
 
     print(str('\n'.join(greedy_motif_search(dnas, k))))
 
-greedy_motif_search_problem()
+
+def greedy_motif_search_laplace_problem():
+    with open('Datasets/GreedyMotifSearch2/quiz.txt', 'r') as datafile:
+        args = datafile.readline().strip().split(" ")
+        k = int(args[0])
+        t = int(args[1])
+        dnas = []
+        for i in range(t):
+            dnas.append(datafile.readline().strip())
+
+    print(str('\n'.join(greedy_motif_search_laplace(dnas, k))))
+
+
+greedy_motif_search_laplace_problem()

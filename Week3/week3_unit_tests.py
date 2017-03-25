@@ -218,3 +218,37 @@ class GreedyMotifSearch(unittest.TestCase):
 
     def test_dataset_4(self):
         self._test('Datasets/GreedyMotifSearch/data04.txt')
+
+
+class GreedyMotifSearchLaplace(unittest.TestCase):
+    def _test(self, datafile_name):
+        with open(datafile_name, 'r') as datafile:
+            datafile.readline() # "Input"
+            args = datafile.readline().strip().split(" ")
+            k = int(args[0])
+            t = int(args[1])
+            dnas = []
+            for i in range(t):
+                dnas.append(datafile.readline().strip())
+            datafile.readline() # "Output"
+            expected_motifs = []
+            for i in range(t):
+                expected_motifs.append(datafile.readline().strip())
+
+        motifs = greedy_motif_search_laplace(dnas, k)
+        self.assertTrue(AreStringListsEqual(expected_motifs, motifs))
+
+    def test_extra_dataset(self):
+        self._test('Datasets/GreedyMotifSearch2/extra.txt')
+
+    def test_sample_dataset(self):
+        self._test('Datasets/GreedyMotifSearch2/sample.txt')
+
+    def test_dataset_1(self):
+        self._test('Datasets/GreedyMotifSearch2/data01.txt')
+
+    def test_dataset_2(self):
+        self._test('Datasets/GreedyMotifSearch2/data02.txt')
+
+    def test_dataset_3(self):
+        self._test('Datasets/GreedyMotifSearch2/data03.txt')
