@@ -38,6 +38,19 @@ def ConvertTextToMatrix(rows, converter = None):
             matrix.append(row_with_text_values)
     return matrix
 
+
+def AreStringListsEqual(list1, list2):
+    if len(list1) != len(list2):
+        return False
+    for val in list1:
+        if val not in list2:
+            return False
+    for val in list2:
+        if val not in list1:
+            return False
+    return True
+
+
 def reduce(function, iterable, initializer=None):
     it = iter(iterable)
     if initializer is None:

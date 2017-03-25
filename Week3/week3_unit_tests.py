@@ -1,6 +1,6 @@
 import unittest
 
-from utilities import ConvertTextToMatrix
+from utilities import ConvertTextToMatrix, AreStringListsEqual
 from Week3.week3_utility import *
 from Week2.week2_unit_tests import ResultEqual
 
@@ -183,4 +183,38 @@ class TestGetProfileMostProbableKmer(unittest.TestCase):
         self.assertEqual(expected, k_mer)
 
 
+class GreedyMotifSearch(unittest.TestCase):
+    def _test(self, datafile_name):
+        with open(datafile_name, 'r') as datafile:
+            datafile.readline() # "Input"
+            args = datafile.readline().strip().split(" ")
+            k = int(args[0])
+            t = int(args[1])
+            dnas = []
+            for i in range(t):
+                dnas.append(datafile.readline().strip())
+            datafile.readline() # "Output"
+            expected_motifs = []
+            for i in range(t):
+                expected_motifs.append(datafile.readline().strip())
 
+        motifs = greedy_motif_search(dnas, k)
+        self.assertTrue(AreStringListsEqual(expected_motifs, motifs))
+
+    def test_extra_dataset(self):
+        self._test('Datasets/GreedyMotifSearch/extra.txt')
+
+    def test_sample_dataset(self):
+        self._test('Datasets/GreedyMotifSearch/sample.txt')
+
+    def test_dataset_1(self):
+        self._test('Datasets/GreedyMotifSearch/data01.txt')
+
+    def test_dataset_2(self):
+        self._test('Datasets/GreedyMotifSearch/data02.txt')
+
+    def test_dataset_3(self):
+        self._test('Datasets/GreedyMotifSearch/data03.txt')
+
+    def test_dataset_4(self):
+        self._test('Datasets/GreedyMotifSearch/data04.txt')

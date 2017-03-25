@@ -1,0 +1,11 @@
+Input:
+3 4
+GCCCAA
+GGCCTG
+AACCTA
+TTCCTT
+Output:
+GCC
+GCC
+AAC
+TTC
