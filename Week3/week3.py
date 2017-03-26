@@ -81,4 +81,12 @@ def greedy_motif_search_laplace_problem():
     print(str('\n'.join(greedy_motif_search_laplace(dnas, k))))
 
 
-greedy_motif_search_laplace_problem()
+def quiz5():
+    dnas = ["CTCGATGAGTAGGAAAGTAGTTTCACTGGGCGAACCACCCCGGCGCTAATCCTAGTGCCC",
+            "GCAATCCTACCCGAGGCCACATATCAGTAGGAACTAGAACCACCACGGGTGGCTAGTTTC",
+            "GGTGTTGAACCACGGGGTTAGTTTCATCTATTGTAGGAATCGGCTTCAAATCCTACACAG"]
+    k = 7
+    ms = find_median_string(dnas, k)
+    print(ms)
+
+quiz5()
