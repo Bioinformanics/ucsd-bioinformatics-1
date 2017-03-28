@@ -1,5 +1,11 @@
 from random import randint
-from Week3.week3_utility import score, profile_laplace, profile_most_probable_kmer
+from Week3.week3_utility import profile_laplace, profile_most_probable_kmer
+
+def score(motifs):
+    columns = [''.join(seq) for seq in zip(*motifs)]
+    max_count = sum([max([c.count(nucleotide) for nucleotide in 'ACGT']) for c in columns])
+    return len(motifs[0])*len(motifs) - max_count
+
 
 """
     RandomizedMotifSearch(Dna, k, t)
@@ -14,8 +20,8 @@ from Week3.week3_utility import score, profile_laplace, profile_most_probable_km
                 return BestMotifs
 """
 def _randomized_motif_search_cycle(dna_list, k, t):
-    rand_ints = [randint(0,len(dna_list[0])-k) for i in range(t)]
-    motifs = [dna_list[i][r:r+k] for i,r in enumerate(rand_ints)]
+    rand_ints = [randint(0, len(dna_list[0]) - k) for i in range(t)]
+    motifs = [dna_list[i][r:r + k] for i, r in enumerate(rand_ints)]
     best_motifs = motifs
     best_motifs_score = score(best_motifs)
     while True:
@@ -28,13 +34,15 @@ def _randomized_motif_search_cycle(dna_list, k, t):
         else:
             return best_motifs_score, best_motifs
 
+
 def randomized_motif_search(dna_list, k, t):
     best_motifs_score = k*t
     best_motifs = None
-    for repeat in range(10000):
+    for repeat in range(1000):
         bms, bm = _randomized_motif_search_cycle(dna_list, k, t)
         if bms < best_motifs_score:
             best_motifs = bm
             best_motifs_score = bms
-        else:
-            return best_motifs
+
+    return best_motifs
+

@@ -9,16 +9,20 @@ class TestRandomizedMotifSearch(unittest.TestCase):
             args = datafile.readline().strip().split(" ")
             k = int(args[0])
             t = int(args[1])
-            dnas = []
+            dna_list = []
             for i in range(t):
-                dnas.append(datafile.readline().strip())
+                dna_list.append(datafile.readline().strip())
             datafile.readline() # "Output"
             expected_motifs = []
             for i in range(t):
                 expected_motifs.append(datafile.readline().strip())
 
-        motifs = randomized_motif_search(dnas, k, t)
-        self.assertTrue(AreStringListsEqual(expected_motifs, motifs))
+        motifs = randomized_motif_search(dna_list, k, t)
+        passed = AreStringListsEqual(expected_motifs, motifs)
+        if not passed:
+            print("Expected: " + ' '.join(expected_motifs))
+            print("Actual: " + ' '.join(motifs))
+        self.assertTrue(passed)
 
     def test_extra_dataset(self):
         self._test('Datasets/RandomizedMotifSearch/extra.txt')
