@@ -27,4 +27,15 @@ def gibbs_sampler_problem():
 
 
 #randomized_motif_search_problem()
-gibbs_sampler_problem()
+#gibbs_sampler_problem()
+
+def quiz5():
+    dna_list = ["AAGCCAAA", "AATCCTGG", "GCTACTTG", "ATGTTTTG"]
+    k = 3
+    t = 4
+    motifs = ["CCA", "CCT", "CTT", "TTG"]
+    profile = profile_laplace(motifs)
+    new_motifs = [profile_most_probable_kmer(dna, k, profile) for dna in dna_list]
+    print(" ".join(new_motifs))
+
+quiz5()
