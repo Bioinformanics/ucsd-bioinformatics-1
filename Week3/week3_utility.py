@@ -77,22 +77,21 @@ def find_median_string(dnas, k):
     return ms
 
 
-def get_profile_most_probable_k_mer(dna, profile_matrix):
+def get_profile_most_probable_k_mer(dna, k, profile):
     """
     Profile-most Probable k-mer Problem: Find a Profile-most probable k-mer in a string.
     (https://stepik.org/lesson/Greedy-Motif-Search-159/step/3?course=Stepic-Interactive-Text-for-Week-3&unit=8217)
     :param dna: a DNA string
-    :param profile_matrix: a 4 × k matrix Profile
+    :param profile: a 4 × k matrix Profile
     :return: A Profile-most probable k-mer in Text.
     """
-    k = len(profile_matrix[0])
-    max_probability = 0
+    max_probability = -1
     max_k_mer = None
     for index in range(len(dna) - k + 1):
         k_mer = dna[index: index + k]
         probability = 1
         for pos, base in enumerate(k_mer):
-            probability *= profile_matrix[ConvertBaseToIndex(base)][pos]
+            probability *= profile['ACGT'.index(base)][pos]
         if probability > max_probability:
             max_probability = probability
             max_k_mer = k_mer

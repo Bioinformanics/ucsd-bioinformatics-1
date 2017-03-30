@@ -133,54 +133,28 @@ class TestFindMediumString(unittest.TestCase):
 
 
 class TestGetProfileMostProbableKmer(unittest.TestCase):
-    def test_sample(self):
-        with open('Datasets/ProfileMostProbableKMer/sample.txt', 'r') as datafile:
+    def _test(self, datafile_name, expected):
+        with open(datafile_name, 'r') as datafile:
             dna = datafile.readline().strip()
             k = int(datafile.readline().strip())
             matrix_text = []
             for loop in range(4):
                 matrix_text.append(datafile.readline().strip())
-        matrix = ConvertTextToMatrix(matrix_text, float)
-        k_mer = get_profile_most_probable_k_mer(dna, matrix)
-        expected = "CCGAG"
+        profile = ConvertTextToMatrix(matrix_text, float)
+        k_mer = get_profile_most_probable_k_mer(dna, k, profile)
         self.assertEqual(expected, k_mer)
+
+    def test_sample(self):
+        self._test('Datasets/ProfileMostProbableKMer/sample.txt', "CCGAG")
 
     def test_dataset_1(self):
-        with open('Datasets/ProfileMostProbableKMer/data01.txt', 'r') as datafile:
-            dna = datafile.readline().strip()
-            k = int(datafile.readline().strip())
-            matrix_text = []
-            for loop in range(4):
-                matrix_text.append(datafile.readline().strip())
-        matrix = ConvertTextToMatrix(matrix_text, float)
-        k_mer = get_profile_most_probable_k_mer(dna, matrix)
-        expected = "AGCAGCTT"
-        self.assertEqual(expected, k_mer)
+        self._test('Datasets/ProfileMostProbableKMer/data01.txt', "AGCAGCTT")
 
     def test_dataset_2(self):
-        with open('Datasets/ProfileMostProbableKMer/data02.txt', 'r') as datafile:
-            dna = datafile.readline().strip()
-            k = int(datafile.readline().strip())
-            matrix_text = []
-            for loop in range(4):
-                matrix_text.append(datafile.readline().strip())
-        matrix = ConvertTextToMatrix(matrix_text, float)
-        k_mer = get_profile_most_probable_k_mer(dna, matrix)
-        expected = "AAGCAGAGTTTA"
-        self.assertEqual(expected, k_mer)
+        self._test('Datasets/ProfileMostProbableKMer/data02.txt', "AAGCAGAGTTTA")
 
     def test_debug_dataset(self):
-        with open('Datasets/ProfileMostProbableKMer/debug.txt', 'r') as datafile:
-            dna = datafile.readline().strip()
-            k = int(datafile.readline().strip())
-            matrix_text = []
-            for loop in range(4):
-                matrix_text.append(datafile.readline().strip())
-        matrix = ConvertTextToMatrix(matrix_text, float)
-        k_mer = get_profile_most_probable_k_mer(dna, matrix)
-
-        expected = "TGTCGC"
-        self.assertEqual(expected, k_mer)
+        self._test('Datasets/ProfileMostProbableKMer/debug.txt', "TGTCGC")
 
 
 class GreedyMotifSearch(unittest.TestCase):

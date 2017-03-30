@@ -1,5 +1,5 @@
 from random import randint
-from Week3.week3_utility import profile_laplace, profile_most_probable_kmer
+from Week3.week3_utility import profile_laplace, profile_most_probable_kmer, get_profile_most_probable_k_mer
 
 def score(motifs):
     columns = [''.join(seq) for seq in zip(*motifs)]
@@ -26,7 +26,7 @@ def _randomized_motif_search_cycle(dna_list, k, t):
     best_motifs_score = score(best_motifs)
     while True:
         p = profile_laplace(motifs)
-        motifs = [profile_most_probable_kmer(dna, k, p) for dna in dna_list]
+        motifs = [get_profile_most_probable_k_mer(dna, k, p) for dna in dna_list]
         motifs_score = score(motifs)
         if motifs_score < best_motifs_score:
             best_motifs = motifs
