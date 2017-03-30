@@ -36,3 +36,33 @@ class TestRandomizedMotifSearch(unittest.TestCase):
     def test_dataset_2(self):
         self._test('Datasets/RandomizedMotifSearch/data02.txt')
 
+
+class TestGibbsSampler(unittest.TestCase):
+    def _test(self, datafile_name):
+        with open(datafile_name, 'r') as datafile:
+            datafile.readline() # "Input"
+            args = datafile.readline().strip().split(" ")
+            k = int(args[0])
+            t = int(args[1])
+            N = int(args[2])
+            dna_list = []
+            for i in range(t):
+                dna_list.append(datafile.readline().strip())
+            datafile.readline() # "Output"
+            expected_motifs = []
+            for i in range(t):
+                expected_motifs.append(datafile.readline().strip())
+
+        motifs = gibbs_sampler(dna_list, k, t, N)
+        passed = AreStringListsEqual(expected_motifs, motifs)
+        if not passed:
+            print("Expected: " + ' '.join(expected_motifs))
+            print("Actual: " + ' '.join(motifs))
+        self.assertTrue(passed)
+
+    def test_extra_dataset(self):
+        self._test('Datasets/GibbsSampler/extra.txt')
+
+    def test_sample_dataset(self):
+        self._test('Datasets/GibbsSampler/sample.txt')
+
